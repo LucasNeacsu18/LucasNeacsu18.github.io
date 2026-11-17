@@ -23,6 +23,13 @@
     <meta name="theme-color" content="#1a1a19" />
     <link rel="preconnect" href="https://financialmodelingprep.com" crossorigin /><link rel="preconnect" href="https://assets.coincap.io" crossorigin /><link rel="preconnect" href="https://flagcdn.com" crossorigin />
     <style>html,body{background:#1a1a19;min-height:100dvh;margin:0}</style>
+    <script>
+      /* D411 · arriving from an old Meridian address: store what it carried (sign-in, settings) unless this address already has its own, then tidy the URL */
+      (function () { var h = location.hash; if (h.indexOf('m2move=') < 0) return; var m = /m2move=([^&]*)/.exec(h), to = /[&#]to=([^&]*)/.exec(h);
+        try { var j = JSON.parse(decodeURIComponent(escape(atob((m && m[1] || '').replace(/-/g, '+').replace(/_/g, '/'))))); for (var k in j) { if (localStorage.getItem(k) === null) localStorage.setItem(k, j[k]); } } catch (e) { /* nothing carried */ }
+        history.replaceState(null, '', location.pathname + location.search + (to ? decodeURIComponent(to[1]) : '')); })();
+    </script>
+
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="apple-touch-icon" href="./icon-192.png" />
